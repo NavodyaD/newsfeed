@@ -13,4 +13,11 @@ class FirebaseAuthDatasource {
       password: password,
     );
   }
+
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) {
+    return firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+    );
+  }
 }

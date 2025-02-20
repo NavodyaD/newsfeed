@@ -15,6 +15,12 @@ class AuthRepositoryImpl implements AuthRepository {
     final result = await datasource.signUpWithEmailPassword(email, password);
     return result.user!;
   }
+
+  @override
+  Future<User> loginWithEmailPassword(String email, String password) async {
+    final result = await datasource.signInWithEmailAndPassword(email, password);
+    return result.user!;
+  }
 }
 
 

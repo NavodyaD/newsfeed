@@ -26,67 +26,76 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(labelText: 'Name'),
-            ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 16),
-            Text('Select Your News Interests:'),
-            ...interests.map((interest) {
-              return CheckboxListTile(
-                title: Text(interest),
-                value: selectedInterests.contains(interest),
-                onChanged: (bool? value) {
-                  setState(() {
-                    if (value == true) {
-                      selectedInterests.add(interest);
-                    } else {
-                      selectedInterests.remove(interest);
-                    }
-                  });
-                },
-              );
-            }).toList(),
-            BlocConsumer<SignUpCubit, SignUpState>(
-              listener: (context, state) {
-                if (state is SignUpSuccess) {
-                  // Navigate to home or login page
-                } else if (state is SignUpError) {
-                  // Show error
-                }
-              },
-              builder: (context, state) {
-                if (state is SignUpLoading) {
-                  return CircularProgressIndicator();
-                }
-                return ElevatedButton(
-                  onPressed: () {
-                    context.read<SignUpCubit>().signUp(
-                      emailController.text,
-                      passwordController.text,
-                      nameController.text,
-                      selectedInterests,
-                    );
+      appBar: AppBar(title: Text('NewsFeed Sign Up')),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              SizedBox(height: 16),
+              Text('Select Your News Interests:'),
+              ...interests.map((interest) {
+                return CheckboxListTile(
+                  title: Text(interest),
+                  value: selectedInterests.contains(interest),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      if (value == true) {
+                        selectedInterests.add(interest);
+                      } else {
+                        selectedInterests.remove(interest);
+                      }
+                    });
                   },
-                  child: Text('Sign Up'),
                 );
-              },
-            ),
-          ],
+              }).toList(),
+              BlocConsumer<SignUpCubit, SignUpState>(
+                listener: (context, state) {
+                  if (state is SignUpSuccess) {
+                    // Nav to home
+                  } else if (state is SignUpError) {
+                    // error message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SignUpLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<SignUpCubit>().signUp(
+                          emailController.text,
+                          passwordController.text,
+                          nameController.text,
+                          selectedInterests,
+                        );
+                      },
+                      child: Text('Sign Up'),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
