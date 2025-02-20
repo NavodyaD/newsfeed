@@ -1,6 +1,7 @@
 // datasource
 import 'package:firebase_auth/firebase_auth.dart';
 
+// Firebase data source - Create user in firebase auth
 class FirebaseAuthDatasource {
   final FirebaseAuth firebaseAuth;
 
@@ -10,6 +11,13 @@ class FirebaseAuthDatasource {
     return firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
+    );
+  }
+
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) {
+    return firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
     );
   }
 }
