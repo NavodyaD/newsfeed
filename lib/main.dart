@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsfeed/features/bottomnavbar/presentation/bottom_nav_bar_screen.dart';
 
 import 'features/authentication/data/datasources/firebase_auth_datasource.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Auth App',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: SignUpPage(),
+        home: BottomNavBarScreen(),
       ),
     );
   }
