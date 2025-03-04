@@ -1,6 +1,7 @@
 // lib/features/bottom_nav_bar/presentation/bottom_nav_bar_screen.dart
 import 'package:flutter/material.dart';
 import 'package:newsfeed/features/homepage/presentation/homepage.dart';
+import 'package:newsfeed/features/news/presentation/pages/news_page.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(),
+    const NewsFeedPage(),
     const HomePage(),
     const HomePage(),
   ];
