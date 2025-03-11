@@ -33,8 +33,13 @@ class NewsApiService {
         final data = json.decode(response.body);
         final articles = data['articles'] as List; // extract articles of response
 
+        // Log the news response
+        print('Response data: $data');
+
         // convert articles to NewsArticle objects
-        return articles.map((article) => NewsArticle.fromJson(article)).toList();
+        return articles
+            .map<NewsArticle>((article) => NewsArticle.fromJson(article as Map<String, dynamic>))
+            .toList();
       } else {
         throw Exception('Unable to load news: ${response.statusCode}');
       }

@@ -9,6 +9,10 @@ class NewsArticleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // log the article rendering
+    print('Rendering article: ${article.title}');
+
     return Card(
       margin: const EdgeInsets.all(8.0),
       elevation: 4.0,

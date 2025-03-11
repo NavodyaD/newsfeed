@@ -37,11 +37,15 @@ class _HomePageState extends State<NewsFeedPage> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No news available'));
           } else {
-            // refresh-indicator | pull-to-refresh
+
+            print('Data Type: ${snapshot.data.runtimeType}');
+            print('Data: ${snapshot.data}');
+
+            // News data is available
             return RefreshIndicator(
               onRefresh: () async {
                 setState(() {
-                  _newsFuture = _newsApiService.getTopNewsHeadlines();
+                  _newsFuture = _newsApiService.getTopNewsHeadlines(); // Re-fetch the news on pull-to-refresh
                 });
               },
               child: ListView.builder(
