@@ -2,18 +2,28 @@
 import 'package:flutter/material.dart';
 import 'package:newsfeed/features/homepage/presentation/homepage.dart';
 import 'package:newsfeed/features/news/presentation/pages/news_page.dart';
+import 'package:newsfeed/features/news/presentation/pages/search_page.dart';
+
+import '../../news/data/datasource/news_api_service.dart';
+import '../../news/data/repositories/news_repository_impl.dart';
+import '../../news/domain/repositories/news_repository.dart';
+import '../../news/domain/usecases/search_news_usecase.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   @override
   _BottomNavBarScreenState createState() => _BottomNavBarScreenState();
 }
 
+final NewsApiService apiService = NewsApiService();
+final NewsRepository newsRepository = NewsRepositoryImpl(apiService);
+final SearchNewsUseCase searchNewsUseCase = SearchNewsUseCase(newsRepository);
+
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
     const NewsFeedPage(),
-    const HomePage(),
+    NewsSearchPage(searchNewsUseCase: searchNewsUseCase),
     const HomePage(),
   ];
 

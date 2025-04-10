@@ -26,5 +26,4 @@ class NewsArticle {
       publishedAt: json['publishedAt'] as String? ?? 'Unknown date',
     );
   }
-
 }
