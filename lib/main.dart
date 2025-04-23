@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Auth App',
         theme: ThemeData(primarySwatch: Colors.blue),
         home: BottomNavBarScreen(),

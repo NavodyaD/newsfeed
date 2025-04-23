@@ -13,7 +13,7 @@ class NewsArticleCard extends StatelessWidget {
     // log the article rendering
     print('Rendering article: ${article.title}');
 
-    return Card(
+    return Card(  
       margin: const EdgeInsets.all(8.0),
       elevation: 4.0,
       child: Column(
@@ -22,7 +22,7 @@ class NewsArticleCard extends StatelessWidget {
           article.imageUrl.isNotEmpty
               ? Image.network(
             article.imageUrl,
-            height: 200,
+            height: 150,
             width: double.infinity,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
@@ -45,6 +45,7 @@ class NewsArticleCard extends StatelessWidget {
               children: [
                 Text(
                   article.title,
+                  maxLines: 2,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -53,7 +54,7 @@ class NewsArticleCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   article.description,
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 6),

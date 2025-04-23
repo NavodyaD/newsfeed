@@ -25,38 +25,65 @@ class _HomePageState extends State<NewsFeedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NewsFeed'),
+        leading: IconButton(
+          padding: EdgeInsets.only(left: 16),
+          icon: Icon(Icons.menu, color: Colors.blue.shade900, size: 27,),
+          onPressed: () {
+          },
+        ),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: Image.asset(
+            'assets/newsfeed_logo.png',
+            height: 31,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            padding: EdgeInsets.only(right: 16),
+            icon: Icon(Icons.notifications_none, color: Colors.blue.shade900, size: 27,),
+            onPressed: () {
+            },
+          ),
+        ],
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-      body: FutureBuilder<List<NewsArticle>>(
-        future: _newsFuture, // listen to _newsFuture
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No news available'));
-          } else {
 
-            print('Data Type: ${snapshot.data.runtimeType}');
-            print('Data: ${snapshot.data}');
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: FutureBuilder<List<NewsArticle>>(
+          future: _newsFuture, // listen to _newsFuture
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No news available'));
+            } else {
 
-            // News data is available
-            return RefreshIndicator(
-              onRefresh: () async {
-                setState(() {
-                  _newsFuture = _newsApiService.getTopNewsHeadlines(); // Re-fetch the news on pull-to-refresh
-                });
-              },
-              child: ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return NewsArticleCard(article: snapshot.data![index]);
+              print('Data Type: ${snapshot.data.runtimeType}');
+              print('Data: ${snapshot.data}');
+
+              // News data is available
+              return RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {
+                    _newsFuture = _newsApiService.getTopNewsHeadlines(); // Re-fetch the news on pull-to-refresh
+                  });
                 },
-              ),
-            );
-          }
-        },
+                child: ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return NewsArticleCard(article: snapshot.data![index]);
+                  },
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

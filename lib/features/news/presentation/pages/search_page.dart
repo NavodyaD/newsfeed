@@ -42,31 +42,63 @@ class _NewsSearchPageState extends State<NewsSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search News')),
+      appBar: AppBar(
+        centerTitle: true,
+          title: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text('Search News', style: TextStyle(fontWeight: FontWeight.bold),)),
+      ),
+
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text("Enter keywords for search", style: TextStyle(fontSize: 16),),
+            SizedBox(height: 10,),
             TextField(
               controller: _keyword1Controller,
-              decoration: InputDecoration(labelText: 'Enter Keyword 1'),
+              decoration: InputDecoration(labelText: 'Enter 1st Keyword'),
             ),
             TextField(
               controller: _keyword2Controller,
-              decoration: InputDecoration(labelText: 'Enter Keyword 2'),
+              decoration: InputDecoration(labelText: 'Enter 2nd Keyword'),
             ),
             TextField(
               controller: _keyword3Controller,
-              decoration: InputDecoration(labelText: 'Enter Keyword 3'),
+              decoration: InputDecoration(labelText: 'Enter 3rd Keyword'),
             ),
             TextField(
               controller: _keyword4Controller,
-              decoration: InputDecoration(labelText: 'Enter Keyword 4'),
+              decoration: InputDecoration(labelText: 'Enter 4th Keyword'),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _searchNews,
-              child: Text('Search'),
+              label: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search, color: Colors.white),
+                    SizedBox(width: 6,),
+                    Text(
+                      'Search News',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[900], // Dark blue
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                padding: EdgeInsets.zero, // Padding handled inside label
+                elevation: 4,
+              ),
             ),
             SizedBox(height: 20),
             Expanded(

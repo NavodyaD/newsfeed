@@ -46,7 +46,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               duration: Duration(milliseconds: 200),
               child: Icon(
                 Icons.home,
-                color: _selectedIndex == 0 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 0 ? Colors.blue.shade900 : Colors.grey,
               ),
             ),
             label: 'Home',
@@ -58,7 +58,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               duration: Duration(milliseconds: 200),
               child: Icon(
                 Icons.search,
-                color: _selectedIndex == 1 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 1 ? Colors.blue.shade900 : Colors.grey,
               ),
             ),
             label: 'Search',
@@ -70,7 +70,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               duration: Duration(milliseconds: 200),
               child: Icon(
                 Icons.person,
-                color: _selectedIndex == 2 ? Colors.blue : Colors.grey,
+                color: _selectedIndex == 2 ? Colors.blue.shade900 : Colors.grey,
               ),
             ),
             label: 'Profile',
@@ -78,7 +78,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.blue.shade900,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
