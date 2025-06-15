@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsfeed/features/news/presentation/pages/newsdetails_page.dart';
 
 import '../../domain/entities/news_article.dart';
 import '../../domain/usecases/search_news_usecase.dart';
@@ -126,7 +127,17 @@ class _NewsSearchPageState extends State<NewsSearchPage> {
                       child: ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return NewsArticleCard(article: snapshot.data![index]);
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NewsDetailsPage(article: snapshot.data![index]),
+                                  ),
+                                );
+                              },
+                              child: NewsArticleCard(article: snapshot.data![index])
+                          );
                         },
                       ),
                     );
