@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsfeed/features/news/presentation/pages/newsdetails_page.dart';
 
 import '../../data/datasource/news_api_service.dart';
 import '../../domain/entities/news_article.dart';
@@ -71,13 +72,23 @@ class _HomePageState extends State<NewsFeedPage> {
               return RefreshIndicator(
                 onRefresh: () async {
                   setState(() {
-                    _newsFuture = _newsApiService.getTopNewsHeadlines(); // Re-fetch the news on pull-to-refresh
+                    _newsFuture = _newsApiService.getTopNewsHeadlines(); // Re-fetch the news
                   });
                 },
                 child: ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    return NewsArticleCard(article: snapshot.data![index]);
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsDetailsPage(article: snapshot.data![index]),
+                            ),
+                          );
+                        },
+                        child: NewsArticleCard(article: snapshot.data![index])
+                    );
                   },
                 ),
               );
